@@ -50,12 +50,12 @@ for (int y = 0; y < HEIGHT; ++y) {
 
   for (int x = 0; x < WIDTH; ++x){
 
-      col = t^(t>>9^t>>13)+(t|t>>9);
+      col = t - (t^t>>(t>>cnt));
 
       gfx_rca.drawPixel((col+cnt)%WIDTH, y, coll);
-      raw_data[x] = (int16_t)col;
+      raw_data[x] = (int16_t)(cnt*col);
 
-      t = t + 32;
+      t = t + 1;
 
     }
 

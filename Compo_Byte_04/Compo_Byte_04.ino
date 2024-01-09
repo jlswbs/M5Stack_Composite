@@ -9,7 +9,6 @@
 M5UnitRCA gfx_rca (WIDTH, HEIGHT, WIDTH, HEIGHT, M5UnitRCA::signal_type_t::PAL, M5UnitRCA::use_psram_t::psram_no_use, 26);
 
   long t, cnt, col;
-  uint16_t coll;
   int16_t raw_data[WIDTH];
 
 void setup(void) {
@@ -50,12 +49,12 @@ for (int y = 0; y < HEIGHT; ++y) {
 
   for (int x = 0; x < WIDTH; ++x){
 
-      col = t^(t>>9^t>>13)+(t|t>>9);
+      col = (t>>2-t>>4)+t>>cnt;
 
-      gfx_rca.drawPixel((col+cnt)%WIDTH, y, coll);
-      raw_data[x] = (int16_t)col;
+      gfx_rca.drawPixel((col+cnt)%WIDTH, y, (uint16_t)col);
+      raw_data[x] = (int16_t)(cnt*col);
 
-      t = t + 32;
+      t = t + 128;
 
     }
 
@@ -63,7 +62,6 @@ for (int y = 0; y < HEIGHT; ++y) {
 
   }
 
-  coll = col;
   cnt++;
  
 }

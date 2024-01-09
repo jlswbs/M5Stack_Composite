@@ -1,4 +1,4 @@
-// Composite video and Byte-Beat algo 01 //
+// Composite video and ByteBeat algo //
 
 #include <M5Unified.h>
 #include <M5UnitRCA.h>
@@ -13,7 +13,11 @@ M5UnitRCA gfx_rca (WIDTH, HEIGHT, WIDTH, HEIGHT, M5UnitRCA::signal_type_t::PAL, 
 
 void setup(void) {
 
-  M5.begin();  
+  M5.begin();
+  M5.Display.clear(BLACK);
+  M5.Display.setTextColor(WHITE);
+  M5.Lcd.setTextSize(2);
+  M5.Display.drawString("ByteBeat video synthesizer", 5, 20);
 
   auto spk_cfg        = M5.Speaker.config();
   spk_cfg.i2s_port    = I2S_NUM_1;
